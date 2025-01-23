@@ -23,17 +23,21 @@ def menu():
         title = input("Enter the title of the book: \n")
         author = input("Enter the author of the book: \n")
         year = input("Enter the year of the book: \n")
-        add_book( title, author, year)
+        print(add_book( title, author, year))
+        menu()
     elif option == 2:
         book = input("Enter the title of the book: \n")
-        search_book(book)
+        print(search_book(book))
+        menu()
     elif option == 3:
         book = input("Enter the title of the book: \n")
-        delete_book(book)
+        print(delete_book(book))
+        menu()
     elif option == 4:
-        list_books()
+        print(list_books())
+        menu()
     elif option == 5:
-        exit
+        exit()
     else:
         print("Invalid option")
         menu()
@@ -41,34 +45,27 @@ def menu():
 def add_book(titulo, autor, any):
     id = len(biblioteca)
     biblioteca[id] = book(titulo, autor, any, id)
-    print("Book added")
-    menu()
+    return "Book added"
 
 def search_book(book):
     for i in biblioteca:
         if biblioteca[i].title == book:
-            print(biblioteca[i])
-            menu()
-        else:
-            print("Book not found")
-            menu()
+            return (f"{biblioteca[i]}")
+    return "Book not found"
+
 
 def delete_book(book):
     for i in biblioteca:
         if biblioteca[i].title == book:
             del biblioteca[i]
-            print("Book deleted")
-            menu()
-        else:
-            print("Book not found")
-            menu()
-    print("There aren't any books to delete!")
-    menu()
+            return "Book deleted"
+    return "Book not found"
 
 def list_books():
+    books = ""
     for i in biblioteca:
-        print(biblioteca[i])
-    menu()
+        books = (f"{books}{biblioteca[i]}\n")
+    return books
 
 if __name__ == "__main__":
     menu()
